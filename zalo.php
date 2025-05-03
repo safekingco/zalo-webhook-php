@@ -1,9 +1,11 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    echo "Zalo webhook verified!";
+    header('Content-Type: application/json');
+    echo json_encode(["message" => "ok"]);
     exit;
 }
 
+// xử lý POST từ Zalo
 $data = file_get_contents("php://input");
 file_put_contents("zalo_log.txt", date('c') . " - " . $data . "\n", FILE_APPEND);
 
